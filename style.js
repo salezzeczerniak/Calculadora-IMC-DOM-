@@ -56,7 +56,7 @@ function classificarImc(imc) {
 }
 
 function organizarDados(dadosUsuario, valorImc, classificacaoImc) {
-    let dataHoraAtual = Date.now()
+    let dataHoraAtual = new Intl.DateTimeFormat('pt-BR', { timeStyle: 'long', dateStyle: 'short' }).format(Date.now())
 
     console.log(dataHoraAtual);
 }
