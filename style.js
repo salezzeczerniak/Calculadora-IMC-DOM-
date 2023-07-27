@@ -25,7 +25,10 @@ function calcular(event){
     usuarios = organizarDados(usuarios, imcCalculado, classificacaoImc)
 
     // Passo 5
-    cadastrarUsuario(usuario)
+    cadastrarUsuario(usuarios)
+
+    // Passo 6
+
 }
 
 
@@ -98,3 +101,21 @@ function cadastrarUsuario(dadosUsuario) {
     
    
 }
+
+function carregarUsuarios() {
+    let listaCarregada = []
+    if(localStorage.getItem("usuariosCadastrados") != null) {
+        listaCarregada = JSON.parse(localStorage.getItem("usuariosCadastrados"))
+    }
+
+    if(listaCarregada.length == 0) {
+        // Se nao tiver nenhum usuario cadastrado, mostrar mensagem:
+        let tabela = document.getElementById("corpo-tabela")
+
+        //innerHTML = HTML interno
+        tabela.innerHTML = "Nennhum usuario cadastrado"
+    }
+    console.log(listaCarregada)
+}
+
+window.addEventListener("DOMContentLoaded", () => carregarUsuarios())
