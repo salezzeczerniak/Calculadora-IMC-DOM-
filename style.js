@@ -4,8 +4,8 @@
 // OK 3 - passo = Gerar a classificação IMC -> classificaçãoImc;
 // OK 4 - passo = Organizar os dados do usuario para salvar na lista e gerar a data de cadastro;
 // OK 5 - passo = Inserir o usuario na lista (salvar no localStorage);
-// 6 - passo = Função para carregar os usuarios (localStorage), chamar ao carregar a página; 
-// 7 - passo = (Renderizar - Mostrar na tela) Renderizar o conteúdo desta tabela com os usuarios cadastrados;
+// OK 6 - passo = Função para carregar os usuarios (localStorage), chamar ao carregar a página; 
+// OK 7 - passo = (Renderizar - Mostrar na tela) Renderizar o conteúdo desta tabela com os usuarios cadastrados;
 // 8 - passo = Botão para limpar os registros (localStorage)
 
 function calcular(event){
@@ -27,7 +27,7 @@ function calcular(event){
     // Passo 5
     cadastrarUsuario(usuarios)
 
-    // Passo 6
+    
 
 }
 
@@ -113,9 +113,40 @@ function carregarUsuarios() {
         let tabela = document.getElementById("corpo-tabela")
 
         //innerHTML = HTML interno
-        tabela.innerHTML = "Nennhum usuario cadastrado"
+        tabela.innerHTML = `<tr class="linha-mensagem">
+        <td colspan="6">Nenhum usuario cadastrado 😭😭 </td>
+        </tr>`
+    }else{
+        // Montar conteudo da tabela
+        montarTabela(listaCarregada)
     }
     console.log(listaCarregada)
+
+}
+window.addEventListener("DOMContentLoaded", () => carregarUsuarios() )
+
+// Passo 7
+function montarTabela(listaUsuarios) {
+    let tabela = document.getElementById("corpo-tabela")
+    let template = ""
+    listaUsuarios.forEach(usuarios=> {
+        template += `<tr>
+        <td data-cell="nome">${usuarios.nome}</td>
+        <td data-cell="altura">${usuarios.altura}</td>
+        <td data-cell="peso">${usuarios.peso}</td>
+        <td data-cell="valor do IMC">${usuarios.imc.toFixed(2)}</td>
+        <td data-cell="classificação do IMC">${usuarios.situacaoImc}</td>
+        <td data-cell="data de cadastro">${usuarios.dataCadastro}</td>
+    </tr>`
+    })
+
+    tabela.innerHTML = template;
 }
 
-window.addEventListener("DOMContentLoaded", () => carregarUsuarios())
+function deletarRegistros() {
+    // Remove o item do localStorage
+    localStorage.removeItem("usuariosCadastrados")
+    // Recarrega a página
+    window.location.reload()
+    
+}
