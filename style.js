@@ -27,7 +27,7 @@ function calcular(event){
     // Passo 5
     cadastrarUsuario(usuarios)
 
-    
+    window.location.reload()
 
 }
 
@@ -148,5 +148,4 @@ function deletarRegistros() {
     localStorage.removeItem("usuariosCadastrados")
     // Recarrega a página
     window.location.reload()
-    
 }
